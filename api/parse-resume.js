@@ -1,6 +1,6 @@
-export const config = { api: { bodyParser: false } }
+const pdfParse = require('pdf-parse')
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
 
   const chunks = []
@@ -19,7 +19,6 @@ export default async function handler(req, res) {
       const fileEnd = filePart.lastIndexOf('\r\n')
       const fileBuffer = Buffer.from(filePart.slice(fileStart, fileEnd), 'binary')
 
-      const pdfParse = (await import('pdf-parse/lib/pdf-parse.js')).default
       const data = await pdfParse(fileBuffer)
       res.status(200).json({ text: data.text })
     } catch (err) {

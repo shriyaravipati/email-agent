@@ -1,8 +1,8 @@
-import Anthropic from '@anthropic-ai/sdk'
+const Anthropic = require('@anthropic-ai/sdk')
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
 
   const { messages, userContext } = req.body
@@ -27,7 +27,7 @@ What you need before writing the email:
 
 What you currently know about the user:
 ${userContext.resumeText
-  ? `Resume:\n${userContext.resumeText.slice(0, 3000)}`
+  ? 'Resume:\n' + userContext.resumeText.slice(0, 3000)
   : 'Resume: not uploaded yet'}
 
 Rules for every email you write:
