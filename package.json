@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vercel-build": "npm install && vite build"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.102.0",
